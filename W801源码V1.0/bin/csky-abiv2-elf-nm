@@ -1,0 +1,3 @@
+#!/bin/bash
+REAL_FILE="${0/csky-abiv2-elf-nm/csky-elfabiv2-nm.exe}"
+exec "$REAL_FILE" "$@"

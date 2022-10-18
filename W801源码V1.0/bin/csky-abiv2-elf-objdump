@@ -1,0 +1,3 @@
+#!/bin/bash
+REAL_FILE="${0/csky-abiv2-elf-objdump/csky-elfabiv2-objdump.exe}"
+exec "$REAL_FILE" "$@"
