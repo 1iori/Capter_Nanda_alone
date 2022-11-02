@@ -25,6 +25,6 @@
 
 
 void pcap01_init(void);
-double pcap01_read_res(uint8_t addr);
+float pcap01_read_res(uint8_t addr);
 
 #endif

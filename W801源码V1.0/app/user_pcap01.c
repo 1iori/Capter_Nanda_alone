@@ -236,12 +236,12 @@ static void pcap01_cfg_reg(void)
 	pcap01_write_register(2,  0x0F170B);  //*******1111 1111 0100 0110 0000 1011 //0x0F460B//0x0F450B//0x0F050B
     //使能了CDC端口，接地单一电容测量模式，内部放电电阻选择10KΩ
 	//pcap01_write_register(3,  0x0D0001);    //3HZ：1101 0000 0000 0000 0001
-    pcap01_write_register(3, 0x0D0001);    //3HZ：0001 0000 0000 0000 0001
+    pcap01_write_register(3, 0x0D0004);    //3HZ：0001 0000 0000 0000 0001
     //CDC时钟循环基准为20us，SEQ_TIME=13,触发周期为0.16s；信噪比为1；
 	//pcap01_write_register(4,  0x07E800);  // 0111 1110 1000 0000 0000//h xx xx 01  @abner 2019.10.30 setting based on datasheet
    pcap01_write_register(4,  0x043200);//CYCSLE=3ms；
     //pcap01_write_register(4,  0x080000);//0000 1010 0000 0000 0000 0000
-    //PG0作为输出电容测量的脉冲触发管脚，持续模式，设置测量电容的周期时间为2.58ms，140us为周期用PG0做CMEAS触发来测量温度
+    //PG0作为输出电容测量的脉冲触发管脚，持续模式，设置测量电容的周期时间为0.66ms，140us为周期用PG0做CMEAS触发来测量温度
 	pcap01_write_register(5,  0x000000);    //h cx xx xx：RDC测量一次
 	pcap01_write_register(6,  0x000040);    //h 00 43 40：进行两次假测量
 	pcap01_write_register(7,  0x1F0000);    //0001 1111 0000 0000 0000 0000
@@ -257,7 +257,7 @@ static void pcap01_cfg_reg(void)
 /*
 *   PCAP01 读取结果寄存器
 */
-double pcap01_read_res(uint8_t addr)
+float pcap01_read_res(uint8_t addr)
 {
     uint8_t send_buf[2] = {0};//储存w801发送给pcap01ad的数据的buffer
     uint8_t read_buf[3] = {0};//储存w801从pcap01ad读取到的数据的buffer

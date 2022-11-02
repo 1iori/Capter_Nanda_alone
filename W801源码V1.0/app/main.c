@@ -41,16 +41,28 @@ static void watchDogInit(void)
 void UserMain(void)
 {	 
     u32 Cap_ref=1000;
-	double cs;
-	watchDogInit();//初始化看门狗
+	float cs;
+	//float ran[10]={1.5,1.5,1.6,1.5,1.5,4.5,4.5,4.5,4.5,5.6};
+	//watchDogInit();//初始化看门狗
 	printf("\r\n测试开始\r\n");	
 	pcap01_init(); //初始化PCAP01	  
-			
+	float last_cs= 0;		
 	while(1)
 	{
-		cs=(pcap01_read_res(1)/2097152)*Cap_ref;
-		delay_us(20*1000);//10ms
-		printf("$%f;\n", cs);
+		cs=(pcap01_read_res(1)/2097152)*Cap_ref;//0.66ms的测量周期
+		if(cs!=last_cs)
+		printf("%f\n",cs);
+		last_cs=cs;
+		delay_us(1000);//1ms
+
+		/*for(int i=0;i<10;i++)
+		{
+		if(ran[i]!=last_cs)
+           printf("$%f;\n", ran[i]);
+	       last_cs=ran[i];
+		}
+		delay_us(1000);//1ms*/
+		//printf("$%f;\n", cs);
 
 	}
 }

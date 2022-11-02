@@ -59,7 +59,6 @@ uint8_t user_iic_wait_ack(void)
         if(ucErrTime > 250)
         {
             user_iic_stop();
-            printf("IICERROR!!!");
             return 1;
         }
     }
